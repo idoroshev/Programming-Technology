@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Draw">
+            <items>
+                  <Menu mnemonicParsing="false" text="Shape 1D">
+                     <items>
+                        <MenuItem fx:id="drawLine" mnemonicParsing="false" onAction="#onDrawLine" text="Line" />
+                        <MenuItem fx:id="drawRay" mnemonicParsing="false" onAction="#onDrawRay" text="Ray" />
+                        <MenuItem fx:id="drawSegment" mnemonicParsing="false" onAction="#onDrawSegment" text="Segment" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Shape 2D">
+                     <items>
+                        <Menu mnemonicParsing="false" text="Polygoned">
+                           <items>
+                              <MenuItem fx:id="drawPolygon" mnemonicParsing="false" onAction="#onDrawPolygon" text="Polygon" />
+                              <MenuItem fx:id="drawSymmetric" mnemonicParsing="false" onAction="#onDrawSymmetric" text="Symmetric Polygon" />
+                              <MenuItem fx:id="drawRectangle" mnemonicParsing="false" onAction="#onDrawRectangle" text="Rectangle" />
+                              <MenuItem fx:id="drawTriangle" mnemonicParsing="false" onAction="#onDrawTriangle" text="Triangle" />
+                              <MenuItem fx:id="drawRhombus" mnemonicParsing="false" onAction="#onDrawRhombus" text="Rhombus" />
+                              <MenuItem fx:id="drawSquare" mnemonicParsing="false" onAction="#onDrawSquare" text="Square" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Elliptical">
+                           <items>
+                              <MenuItem fx:id="drawEllipse" mnemonicParsing="false" onAction="#onDrawEllipse" text="Ellipse" />
+                              <MenuItem fx:id="drawCircle" mnemonicParsing="false" onAction="#onDrawCircle" text="Circle" />
+                           </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Color">
+               <items>
+                  <MenuItem fx:id="changeColor" mnemonicParsing="false" onAction="#changeColor" text="Change Color" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
