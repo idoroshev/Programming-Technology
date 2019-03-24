@@ -4,7 +4,9 @@ import figures.shape1d.Point;
 import figures.shape2d.Shape2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Polygon extends Shape2D {
 
@@ -17,12 +19,16 @@ public class Polygon extends Shape2D {
 
 	@Override
 	public void draw(Pane pane) {
-		for (int i = 0; i < points.length - 1; ++i) {
-			Line line = new Line(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
-			pane.getChildren().add(line);
+		javafx.scene.shape.Polygon polygon = new javafx.scene.shape.Polygon();
+		List<Double> list = new ArrayList<>();
+		for (Point point : points) {
+			list.add(point.x);
+			list.add(point.y);
 		}
-		Line endLine = new Line(points[0].x, points[0].y, points[points.length - 1].x, points[points.length - 1].y);
-		pane.getChildren().add(endLine);
+		polygon.getPoints().setAll(list);
+		polygon.setStroke(color);
+		polygon.setFill(fill);
+		pane.getChildren().add(polygon);
 	}
 
 	public void move(Point point) {

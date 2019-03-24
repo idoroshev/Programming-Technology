@@ -5,11 +5,11 @@ import figures.shape1d.Ray;
 import figures.shape1d.Segment;
 import figures.shape2d.ellipse.Circle;
 import figures.shape2d.ellipse.Ellipse;
+import figures.shape2d.polygon.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -75,7 +75,7 @@ public class Controller {
     private int clickCount = 0;
     private List<Point> points = new ArrayList<>();
 
-    private int vertexCount = 0;
+    private int vertexCount = 5;
 
     @FXML
     void changeColor(ActionEvent event) {
@@ -147,7 +147,6 @@ public class Controller {
 
     }
 
-
     private void processCircle(MouseEvent event) {
         if (clickCount == 2) {
             Point center = new Point((
@@ -162,8 +161,8 @@ public class Controller {
 
     private void processEllipse(MouseEvent event) {
         if (clickCount == 2) {
-            Point center = new Point((
-                    points.get(0).x + points.get(1).x) / 2,
+            Point center = new Point(
+                    (points.get(0).x + points.get(1).x) / 2,
                     (points.get(0).y + points.get(1).y) / 2);
             Ellipse ellipse = new Ellipse(center, points.get(0), points.get(1), Color.BLACK, Color.BLACK);
             ellipse.draw(pane);
@@ -183,9 +182,9 @@ public class Controller {
 
     private void processPolygon(MouseEvent event) {
         if (clickCount == vertexCount) {
-            Line line = new Line(points.get(0), points.get(1), Color.BLACK);
-            line.draw(pane);
-            currentShape = line;
+            Polygon polygon = new Polygon(points.toArray(new Point[vertexCount]), Color.BLACK, Color.BLACK);
+            polygon.draw(pane);
+            currentShape = polygon;
             clearPoints();
         }
     }
@@ -200,11 +199,21 @@ public class Controller {
     }
 
     private void processRectangle(MouseEvent event) {
-        currentShapeType = ShapeType.RECTANGLE;
+        if (clickCount == 2) {
+            Rectangle rectangle = new Rectangle(points.get(0), points.get(1), Color.BLACK, Color.BLACK);
+            rectangle.draw(pane);
+            currentShape = rectangle;
+            clearPoints();
+        }
     }
 
     private void processRhombus(MouseEvent event) {
-        currentShapeType = ShapeType.RHOMBUS;
+        if (clickCount == 2) {
+            Rhombus rhombus = new Rhombus(points.get(0), points.get(1), Color.BLACK, Color.BLACK);
+            rhombus.draw(pane);
+            currentShape = rhombus;
+            clearPoints();
+        }
     }
 
     private void processSegment(MouseEvent event) {
@@ -218,15 +227,23 @@ public class Controller {
 
     private void processSymmetric(MouseEvent event) {
         if (clickCount == 2) {
-            Segment segment = new Segment(points.get(0), points.get(1), Color.BLACK);
-            segment.draw(pane);
-            currentShape = segment;
+            SymmetricPolygon symmetric =
+                    new SymmetricPolygon(SymmetricPolygon.getSymmetricPoints(
+                            points.get(0), points.get(1), vertexCount), Color.BLACK, Color.BLACK);
+            symmetric.draw(pane);
+            currentShape = symmetric;
             clearPoints();
         }
     }
 
     private void processTriangle(MouseEvent event) {
-        currentShapeType = ShapeType.TRIANGLE;
+        if (clickCount == 3) {
+            Triangle triangle =
+                    new Triangle(points.get(0), points.get(1), points.get(2), Color.BLACK, Color.BLACK);
+            triangle.draw(pane);
+            currentShape = triangle;
+            clearPoints();
+        }
     }
 
     public void setPrimaryStage(Stage stage) {

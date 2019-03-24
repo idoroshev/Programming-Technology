@@ -19,6 +19,7 @@ public class Line extends Ray {
 				center.y,
 				endX,
 				endY);
+		line.setStroke(color);
 		pane.getChildren().add(line	);
 	}
 

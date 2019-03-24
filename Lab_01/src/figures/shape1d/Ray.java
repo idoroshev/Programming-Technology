@@ -19,6 +19,7 @@ public class Ray extends Segment {
 				point.y,
 				point.x + (point.x - center.x) * MULTIPLIER,
 				point.y + (point.y - center.y) * MULTIPLIER);
+		line.setStroke(color);
 		pane.getChildren().add(line	);
 	}
 
