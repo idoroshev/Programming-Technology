@@ -76,7 +76,7 @@ public class Controller {
             public void handle(MouseEvent event) {
                 handler.handle(event);
                 if (handler.clickCount == 2) {
-
+                    System.out.println();
                 }
             }
         });

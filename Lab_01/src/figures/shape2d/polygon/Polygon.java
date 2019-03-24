@@ -4,6 +4,7 @@ import figures.shape1d.Point;
 import figures.shape2d.Shape2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 public class Polygon extends Shape2D {
 
@@ -16,7 +17,10 @@ public class Polygon extends Shape2D {
 
 	@Override
 	public void draw(Pane pane) {
-		//TODO
+		for (int i = 0; i < points.length - 1; ++i) {
+			Line line = new Line(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
+			// Todo draw
+		}
 	}
 
 	public void move(Point point) {

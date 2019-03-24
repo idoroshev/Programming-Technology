@@ -14,11 +14,11 @@ public abstract class Shape {
 		this.color = color;
 	}
 
-    public void setColor(Color color) {
+	public void setColor(Color color) {
         this.color = color;
     }
 
-    public abstract void draw(Pane pane);
+	public abstract void draw(Pane pane);
 
 	public Point getLocation() {
 		return center;
