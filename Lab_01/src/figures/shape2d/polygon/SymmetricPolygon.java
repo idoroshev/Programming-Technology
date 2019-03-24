@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SymmetricPolygon extends Polygon {
 
-	public SymmetricPolygon(Point[] points, int count, Color stroke, Color fill) {
+	public SymmetricPolygon(Point[] points, Color stroke, Color fill) {
 		super(points, stroke, fill);
 	}
 
@@ -16,6 +16,7 @@ public class SymmetricPolygon extends Polygon {
 
 	}
 
+	@SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
 	public static Point[] getSymmetricPoints(Point first, Point secondPoint, int count) {
 		List<Point> points = new ArrayList<>();
 		Point center = new Point((secondPoint.x - first.x) / 2, (secondPoint.y - first.y) / 2);
@@ -28,6 +29,6 @@ public class SymmetricPolygon extends Polygon {
 			points.add(new Point((int)(center.x + dx), (int) (center.y + dy)));
 			currentAngle += angle;
 		}
-		return (Point[]) points.toArray();
+		return points.toArray(new Point[points.size()]);
 	}
 }

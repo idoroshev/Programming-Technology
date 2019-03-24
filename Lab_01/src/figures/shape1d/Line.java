@@ -12,11 +12,14 @@ public class Line extends Ray {
 	@Override
 	public void draw(Pane pane) {
 		super.draw(pane);
+		double endX = center.x - (point.x - center.x) * MULTIPLIER;
+		double endY = center.y - (point.y - center.y) * MULTIPLIER;
 		javafx.scene.shape.Line line = new javafx.scene.shape.Line(
 				center.x,
 				center.y,
-				center.x - (point.x - center.x) * MULTIPLIER,
-				center.y - (point.y - center.y) * MULTIPLIER);
+				endX,
+				endY);
+		line.setStroke(color);
 		pane.getChildren().add(line	);
 	}
 

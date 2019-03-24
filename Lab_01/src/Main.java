@@ -11,10 +11,10 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/lab1.fxml"));
         Parent root = loader.load();
         Controller controller = loader.getController();
-        controller.setPrimaryStage(primaryStage);
         primaryStage.setTitle("Lab_1");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.setResizable(false);
+        controller.setPrimaryStage(primaryStage);
         primaryStage.show();
     }
 
