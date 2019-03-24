@@ -19,8 +19,8 @@ public class SymmetricPolygon extends Polygon {
 	@SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
 	public static Point[] getSymmetricPoints(Point first, Point secondPoint, int count) {
 		List<Point> points = new ArrayList<>();
-		Point center = new Point((secondPoint.x - first.x) / 2, (secondPoint.y - first.y) / 2);
-		double radius = Math.abs(first.x - center.x);
+		Point center = new Point(Math.abs(secondPoint.x + first.x) / 2, Math.abs(secondPoint.y + first.y) / 2);
+		double radius = Math.abs(Math.abs(first.x - center.x));
 		double angle = 2 * Math.PI / count;
 		double currentAngle = 0;
 		for (int i = 0; i < count; i++) {

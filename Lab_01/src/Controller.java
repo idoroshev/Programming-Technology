@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unused")
 public class Controller {
 
     @FXML
@@ -268,7 +269,7 @@ public class Controller {
     }
 
     private void processSymmetric(MouseEvent event) {
-        if (clickCount == vertexCount) {
+        if (clickCount == 2) {
             SymmetricPolygon symmetric =
                     new SymmetricPolygon(SymmetricPolygon.getSymmetricPoints(
                             points.get(0), points.get(1), vertexCount), stroke, fill);
@@ -288,7 +289,7 @@ public class Controller {
         }
     }
 
-    public void setPrimaryStage(Stage stage) {
+    void setPrimaryStage(Stage stage) {
         this.stage = stage;
         pane.addEventFilter(MouseEvent.MOUSE_CLICKED, clickEvent -> {
             clickCount++;
