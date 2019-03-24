@@ -19,8 +19,10 @@ public class Polygon extends Shape2D {
 	public void draw(Pane pane) {
 		for (int i = 0; i < points.length - 1; ++i) {
 			Line line = new Line(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
-			// Todo draw
+			pane.getChildren().add(line);
 		}
+		Line endLine = new Line(points[0].x, points[0].y, points[points.length - 1].x, points[points.length - 1].y);
+		pane.getChildren().add(endLine);
 	}
 
 	public void move(Point point) {
