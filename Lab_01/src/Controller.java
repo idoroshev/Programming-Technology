@@ -9,6 +9,7 @@ import figures.shape2d.polygon.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -72,14 +73,41 @@ public class Controller {
 
     private ShapeType currentShapeType = ShapeType.NONE;
 
+    private int vertexCount = 0;
     private int clickCount = 0;
     private List<Point> points = new ArrayList<>();
 
-    private int vertexCount = 5;
+    private Color stroke = Color.BLACK;
+    private Color fill = Color.BLACK;
 
     @FXML
-    void changeColor(ActionEvent event) {
+    void changeBlackColor(ActionEvent event) {
+        stroke = Color.BLACK;
+    }
 
+    @FXML
+    void changeBlueColor(ActionEvent event) {
+        stroke = Color.BLUE;
+    }
+
+    @FXML
+    void changeRedColor(ActionEvent event) {
+        stroke = Color.RED;
+    }
+
+    @FXML
+    void changeBlackColorFill(ActionEvent event) {
+        fill = Color.BLACK;
+    }
+
+    @FXML
+    void changeBlueColorFill(ActionEvent event) {
+        fill = Color.BLUE;
+    }
+
+    @FXML
+    void changeRedColorFill(ActionEvent event) {
+        fill = Color.RED;
     }
 
     @FXML
@@ -104,6 +132,13 @@ public class Controller {
     void onDrawPolygon(ActionEvent event) {
         clearPoints();
         currentShapeType = ShapeType.POLYGON;
+        List<String> values = new ArrayList<>();
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Vertex count");
+        dialog.setHeaderText("Vertex count");
+        dialog.setContentText("Count: ");
+        dialog.showAndWait().ifPresent(values::add);
+        vertexCount = Integer.parseInt(values.get(0));
     }
 
     @FXML
@@ -134,6 +169,13 @@ public class Controller {
     void onDrawSymmetric(ActionEvent event) {
         clearPoints();
         currentShapeType = ShapeType.SYMMETRIC_POLYGON;
+        List<String> values = new ArrayList<>();
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Vertex count");
+        dialog.setHeaderText("Vertex count");
+        dialog.setContentText("Count: ");
+        dialog.showAndWait().ifPresent(values::add);
+        vertexCount = Integer.parseInt(values.get(0));
     }
 
     @FXML
@@ -152,7 +194,7 @@ public class Controller {
             Point center = new Point((
                     points.get(0).x + points.get(1).x) / 2,
                     (points.get(0).y + points.get(1).y) / 2);
-            Circle circle = new Circle(center, points.get(0), points.get(1), Color.BLACK, Color.BLACK);
+            Circle circle = new Circle(center, points.get(0), points.get(1), stroke, fill);
             circle.draw(pane);
             currentShape = circle;
             clearPoints();
@@ -164,7 +206,7 @@ public class Controller {
             Point center = new Point(
                     (points.get(0).x + points.get(1).x) / 2,
                     (points.get(0).y + points.get(1).y) / 2);
-            Ellipse ellipse = new Ellipse(center, points.get(0), points.get(1), Color.BLACK, Color.BLACK);
+            Ellipse ellipse = new Ellipse(center, points.get(0), points.get(1), stroke, fill);
             ellipse.draw(pane);
             currentShape = ellipse;
             clearPoints();
@@ -173,7 +215,7 @@ public class Controller {
 
     private void processLine(MouseEvent event) {
         if (clickCount == 2) {
-            Line line = new Line(points.get(0), points.get(1), Color.BLACK);
+            Line line = new Line(points.get(0), points.get(1), stroke);
             line.draw(pane);
             currentShape = line;
             clearPoints();
@@ -182,7 +224,7 @@ public class Controller {
 
     private void processPolygon(MouseEvent event) {
         if (clickCount == vertexCount) {
-            Polygon polygon = new Polygon(points.toArray(new Point[vertexCount]), Color.BLACK, Color.BLACK);
+            Polygon polygon = new Polygon(points.toArray(new Point[vertexCount]), stroke, fill);
             polygon.draw(pane);
             currentShape = polygon;
             clearPoints();
@@ -191,7 +233,7 @@ public class Controller {
 
     private void processRay(MouseEvent event) {
         if (clickCount == 2) {
-            Ray ray = new Ray(points.get(0), points.get(1), Color.BLACK);
+            Ray ray = new Ray(points.get(0), points.get(1), stroke);
             ray.draw(pane);
             currentShape = ray;
             clearPoints();
@@ -200,7 +242,7 @@ public class Controller {
 
     private void processRectangle(MouseEvent event) {
         if (clickCount == 2) {
-            Rectangle rectangle = new Rectangle(points.get(0), points.get(1), Color.BLACK, Color.BLACK);
+            Rectangle rectangle = new Rectangle(points.get(0), points.get(1), stroke, fill);
             rectangle.draw(pane);
             currentShape = rectangle;
             clearPoints();
@@ -209,7 +251,7 @@ public class Controller {
 
     private void processRhombus(MouseEvent event) {
         if (clickCount == 2) {
-            Rhombus rhombus = new Rhombus(points.get(0), points.get(1), Color.BLACK, Color.BLACK);
+            Rhombus rhombus = new Rhombus(points.get(0), points.get(1), stroke, fill);
             rhombus.draw(pane);
             currentShape = rhombus;
             clearPoints();
@@ -218,7 +260,7 @@ public class Controller {
 
     private void processSegment(MouseEvent event) {
         if (clickCount == 2) {
-            Segment segment = new Segment(points.get(0), points.get(1), Color.BLACK);
+            Segment segment = new Segment(points.get(0), points.get(1), stroke);
             segment.draw(pane);
             currentShape = segment;
             clearPoints();
@@ -226,10 +268,10 @@ public class Controller {
     }
 
     private void processSymmetric(MouseEvent event) {
-        if (clickCount == 2) {
+        if (clickCount == vertexCount) {
             SymmetricPolygon symmetric =
                     new SymmetricPolygon(SymmetricPolygon.getSymmetricPoints(
-                            points.get(0), points.get(1), vertexCount), Color.BLACK, Color.BLACK);
+                            points.get(0), points.get(1), vertexCount), stroke, fill);
             symmetric.draw(pane);
             currentShape = symmetric;
             clearPoints();
@@ -239,7 +281,7 @@ public class Controller {
     private void processTriangle(MouseEvent event) {
         if (clickCount == 3) {
             Triangle triangle =
-                    new Triangle(points.get(0), points.get(1), points.get(2), Color.BLACK, Color.BLACK);
+                    new Triangle(points.get(0), points.get(1), points.get(2), stroke, fill);
             triangle.draw(pane);
             currentShape = triangle;
             clearPoints();
