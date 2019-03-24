@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -47,7 +47,20 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Color">
                <items>
-                  <MenuItem fx:id="changeColor" mnemonicParsing="false" onAction="#changeColor" text="Change Color" />
+                  <Menu mnemonicParsing="false" text="Change stroke">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#changeBlackColor" text="Black" />
+                        <MenuItem mnemonicParsing="false" onAction="#changeBlueColor" text="Blue" />
+                        <MenuItem mnemonicParsing="false" onAction="#changeRedColor" text="Red" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Change fill">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#changeBlackColorFill" text="Black" />
+                        <MenuItem mnemonicParsing="false" onAction="#changeBlueColorFill" text="Blue" />
+                        <MenuItem mnemonicParsing="false" onAction="#changeRedColorFill" text="Red" />
+                     </items>
+                  </Menu>
                </items>
             </Menu>
         </menus>
