@@ -8,8 +8,4 @@ public class Triangle extends Polygon {
 	public Triangle(Point firstPoint, Point secondPoint, Point thirdPoint, Color stroke, Color fill) {
 		super(new Point[]{firstPoint, secondPoint, thirdPoint}, stroke, fill);
 	}
-
-	public void move(Point point) {
-
-	}
 }

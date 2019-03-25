@@ -66,13 +66,16 @@ public class Controller {
     private MenuItem changeColor;
 
     @FXML
+    private MenuItem move;
+
+    @FXML
     private Pane pane;
 
     private Stage stage;
 
     private Shape currentShape;
 
-    private ShapeType currentShapeType = ShapeType.NONE;
+    private ActionType currentActionType = ActionType.NONE;
 
     private int vertexCount = 0;
     private int clickCount = 0;
@@ -114,25 +117,25 @@ public class Controller {
     @FXML
     void onDrawCircle(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.CIRCLE;
+        currentActionType = ActionType.CIRCLE;
     }
 
     @FXML
     void onDrawEllipse(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.ELLIPSE;
+        currentActionType = ActionType.ELLIPSE;
     }
 
     @FXML
     void onDrawLine(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.LINE;
+        currentActionType = ActionType.LINE;
     }
 
     @FXML
     void onDrawPolygon(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.POLYGON;
+        currentActionType = ActionType.POLYGON;
         List<String> values = new ArrayList<>();
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Vertex count");
@@ -145,31 +148,31 @@ public class Controller {
     @FXML
     void onDrawRay(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.RAY;
+        currentActionType = ActionType.RAY;
     }
 
     @FXML
     void onDrawRectangle(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.RECTANGLE;
+        currentActionType = ActionType.RECTANGLE;
     }
 
     @FXML
     void onDrawRhombus(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.RHOMBUS;
+        currentActionType = ActionType.RHOMBUS;
     }
 
     @FXML
     void onDrawSegment(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.SEGMENT;
+        currentActionType = ActionType.SEGMENT;
     }
 
     @FXML
     void onDrawSymmetric(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.SYMMETRIC_POLYGON;
+        currentActionType = ActionType.SYMMETRIC_POLYGON;
         List<String> values = new ArrayList<>();
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Vertex count");
@@ -182,7 +185,13 @@ public class Controller {
     @FXML
     void onDrawTriangle(ActionEvent event) {
         clearPoints();
-        currentShapeType = ShapeType.TRIANGLE;
+        currentActionType = ActionType.TRIANGLE;
+    }
+
+    @FXML
+    void onMove(ActionEvent event) {
+        clearPoints();
+        currentActionType = ActionType.MOVE;
     }
 
     @FXML
@@ -289,12 +298,21 @@ public class Controller {
         }
     }
 
+    private void processMove(MouseEvent event) {
+        if (clickCount == 1) {
+            if (currentShape != null) {
+                currentShape.move(pane, points.get(0));
+            }
+            clearPoints();
+        }
+    }
+
     void setPrimaryStage(Stage stage) {
         this.stage = stage;
         pane.addEventFilter(MouseEvent.MOUSE_CLICKED, clickEvent -> {
             clickCount++;
             points.add(new Point(clickEvent.getX(), clickEvent.getY()));
-            switch (currentShapeType) {
+            switch (currentActionType) {
                 case LINE:
                     processLine(clickEvent);
                     break;
@@ -325,6 +343,8 @@ public class Controller {
                 case TRIANGLE:
                     processTriangle(clickEvent);
                     break;
+                case MOVE:
+                    processMove(clickEvent);
             }
         });
     }

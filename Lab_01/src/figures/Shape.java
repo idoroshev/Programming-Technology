@@ -24,5 +24,5 @@ public abstract class Shape {
 		return center;
 	}
 
-	public abstract void move(Point point);
+	public abstract void move(Pane pane, Point point);
 }

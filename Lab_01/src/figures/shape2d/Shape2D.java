@@ -16,8 +16,4 @@ public abstract class Shape2D extends Shape {
 
 	@Override
 	public abstract void draw(Pane pane);
-
-	public void move(Point point) {
-
-	}
 }

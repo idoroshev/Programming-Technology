@@ -1,4 +1,4 @@
-public enum ShapeType {
+public enum ActionType {
     NONE,
     LINE,
     RAY,
@@ -9,5 +9,6 @@ public enum ShapeType {
     RECTANGLE,
     RHOMBUS,
     SYMMETRIC_POLYGON,
-    TRIANGLE
+    TRIANGLE,
+    MOVE
 }

@@ -12,10 +12,6 @@ public class SymmetricPolygon extends Polygon {
 		super(points, stroke, fill);
 	}
 
-	public void move(Point point) {
-
-	}
-
 	@SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
 	public static Point[] getSymmetricPoints(Point first, Point secondPoint, int count) {
 		List<Point> points = new ArrayList<>();

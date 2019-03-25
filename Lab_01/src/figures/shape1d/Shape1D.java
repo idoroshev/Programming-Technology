@@ -5,14 +5,10 @@ import javafx.scene.paint.Color;
 
 public abstract class Shape1D extends Shape {
 
-	protected Point point;
+	protected Point anotherPoint;
 
 	public Shape1D(Point p1, Point p2, Color color) {
-		super(p1, color);
-		this.point = p2;
-	}
-
-	public void move(Point point) {
-
-	}
+        super(p1, color);
+        this.anotherPoint = p2;
+    }
 }

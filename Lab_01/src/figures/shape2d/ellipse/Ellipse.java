@@ -9,6 +9,7 @@ public class Ellipse extends Shape2D {
 
 	private Point firstPoint;
 	private Point secondPoint;
+	private javafx.scene.shape.Ellipse ellipse;
 
 	public Ellipse(Point center, Point firstPoint, Point secondPoint, Color stroke, Color fill) {
 		super(center, stroke, fill);
@@ -18,7 +19,7 @@ public class Ellipse extends Shape2D {
 
 	@Override
 	public void draw(Pane pane) {
-		javafx.scene.shape.Ellipse ellipse = new javafx.scene.shape.Ellipse();
+		ellipse = new javafx.scene.shape.Ellipse();
 		ellipse.setCenterX(center.x);
 		ellipse.setCenterY(center.y);
 		ellipse.setRadiusX(Math.abs(secondPoint.x - center.x));
@@ -28,7 +29,17 @@ public class Ellipse extends Shape2D {
 		pane.getChildren().add(ellipse);
 	}
 
-	public void move(Point point) {
-
+	@Override
+	public void move(Pane pane, Point point) {
+        pane.getChildren().remove(ellipse);
+        double dx = point.x - center.x;
+        double dy = point.y - center.y;
+        firstPoint.x += dx;
+        secondPoint.x += dx;
+        center.x += dx;
+        firstPoint.y += dy;
+        secondPoint.y += dy;
+        center.y += dy;
+        draw(pane);
 	}
 }

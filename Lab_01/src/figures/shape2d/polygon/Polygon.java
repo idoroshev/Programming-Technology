@@ -11,6 +11,7 @@ import java.util.List;
 public class Polygon extends Shape2D {
 
 	private Point[] points;
+	private javafx.scene.shape.Polygon polygon;
 
 	public Polygon(Point[] points, Color stroke, Color fill) {
 		super(points[0], stroke, fill);
@@ -19,7 +20,7 @@ public class Polygon extends Shape2D {
 
 	@Override
 	public void draw(Pane pane) {
-		javafx.scene.shape.Polygon polygon = new javafx.scene.shape.Polygon();
+		polygon = new javafx.scene.shape.Polygon();
 		List<Double> list = new ArrayList<>();
 		for (Point point : points) {
 			list.add(point.x);
@@ -31,7 +32,15 @@ public class Polygon extends Shape2D {
 		pane.getChildren().add(polygon);
 	}
 
-	public void move(Point point) {
-
+	@Override
+	public void move(Pane pane, Point point) {
+        pane.getChildren().remove(polygon);
+        double dx = point.x - center.x;
+        double dy = point.y - center.y;
+        for (Point p : points) {
+            p.x += dx;
+            p.y += dy;
+        }
+        draw(pane);
 	}
 }

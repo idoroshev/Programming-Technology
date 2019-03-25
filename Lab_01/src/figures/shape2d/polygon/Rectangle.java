@@ -11,8 +11,4 @@ public class Rectangle extends Polygon {
 				secondPoint,
 				new Point(secondPoint.x, firstPoint.y)}, stroke, fill);
 	}
-
-	public void move(Point point) {
-
-	}
 }

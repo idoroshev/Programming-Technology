@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Line extends Ray {
 
+    private javafx.scene.shape.Line line;
+
 	public Line(Point p1, Point p2, Color color) {
 		super(p1, p2, color);
 	}
@@ -12,9 +14,9 @@ public class Line extends Ray {
 	@Override
 	public void draw(Pane pane) {
 		super.draw(pane);
-		double endX = center.x - (point.x - center.x) * MULTIPLIER;
-		double endY = center.y - (point.y - center.y) * MULTIPLIER;
-		javafx.scene.shape.Line line = new javafx.scene.shape.Line(
+		double endX = center.x - (anotherPoint.x - center.x) * MULTIPLIER;
+		double endY = center.y - (anotherPoint.y - center.y) * MULTIPLIER;
+		line = new javafx.scene.shape.Line(
 				center.x,
 				center.y,
 				endX,
@@ -27,7 +29,17 @@ public class Line extends Ray {
 		return null;
 	}
 
-	public void move(Point point) {
-
-	}
+    @Override
+    public void move(Pane pane, Point point) {
+        pane.getChildren().remove(segment);
+        pane.getChildren().remove(ray);
+        pane.getChildren().remove(line);
+        double dx = point.x - center.x;
+        double dy = point.y - center.y;
+        anotherPoint.x += dx;
+        center.x += dx;
+        anotherPoint.y += dy;
+        center.y += dy;
+        draw(pane);
+    }
 }

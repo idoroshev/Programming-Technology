@@ -11,8 +11,4 @@ public class Rhombus extends Polygon {
 				new Point(Math.abs(secondPoint.x + firstPoint.x) / 2, secondPoint.y),
 				new Point(firstPoint.x, Math.abs(secondPoint.y + firstPoint.y) / 2)}, stroke, fill);
 	}
-
-	public void move(Point point) {
-
-	}
 }
